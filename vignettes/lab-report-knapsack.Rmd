@@ -1,0 +1,22 @@
+---
+title: "Lab Report — Knapsack Problem (Lab 6)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab report knapsack}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(Lab6)
+```
+
+# Introduction
+
+This vignette serves as the **lab report** for **Lab 6** in *Advanced R Programming*.
+
+The purpose of this lab is to explore **algorithmic complexity** and **computational performance** using the **Knapsack problem**.
