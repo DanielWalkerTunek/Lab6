@@ -14,11 +14,11 @@ demonstrate ways to make R code faster.
 
 In this lab, we will:
 
-- task 1
+- bla
 
-- task 2
+- bla
 
-- task 3…
+- bla…
 
 ## Installation
 
@@ -30,4 +30,18 @@ install.packages("devtools")
 
 # install the package:
 devtools::install_github("danielwalker/Lab6")
+```
+
+## Package vignette
+
+This package includes a vignette titled **“lab report knapsack”**, which
+serves as the **main lab report** for **Lab 6**.  
+The vignette contains the written answers, explanations, and performance
+comparisons between the three algorithms.
+
+After installing and building the package, you can view the vignette
+using:
+
+``` r
+browseVignettes("lab report knapsack")
 ```
