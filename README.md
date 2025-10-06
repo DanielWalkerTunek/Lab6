@@ -1,9 +1,33 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # Lab6
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of Lab6 is to …
+The goal of **Lab6** is to explore how algorithmic design and
+implementation affect computational performance in R. We create an R
+package to study algorithms of different computational complexities and
+demonstrate ways to make R code faster.
+
+In this lab, we will:
+
+- task 1
+
+- task 2
+
+- task 3…
+
+## Installation
+
+You can install the development version of **Lab6** from GitHub using:
+
+``` r
+# don't already have devtools:
+install.packages("devtools")
+
+# install the package:
+devtools::install_github("danielwalker/Lab6")
+```
