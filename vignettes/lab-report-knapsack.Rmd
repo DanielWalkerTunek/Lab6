@@ -66,3 +66,20 @@ knapsack_objects <- data.frame(
 head(knapsack_objects)
 ```
 
+
+
+# Problem 1
+
+Question How much time does it takes to run the algorithm for n = 16 objects?
+
+
+
+
+
+
+
+
+
+
+
+
