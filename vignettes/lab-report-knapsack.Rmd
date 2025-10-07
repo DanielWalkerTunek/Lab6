@@ -1,5 +1,5 @@
 ---
-title: "Lab Report — Knapsack Problem (Lab 6)"
+title: "lab report knapsack"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{lab report knapsack}
@@ -20,3 +20,49 @@ library(Lab6)
 This vignette serves as the **lab report** for **Lab 6** in *Advanced R Programming*.
 
 The purpose of this lab is to explore **algorithmic complexity** and **computational performance** using the **Knapsack problem**.
+
+
+# The Knapsack Package
+
+The **Knapsack problem** is a classic *discrete optimization problem*.  
+We have a knapsack that can carry a limited weight `W`, and we want to fill it with `n` items —  
+each item `i` having a weight `wᵢ` and a value `vᵢ`.  
+The goal is to **maximize the total value** of the selected items without exceeding the weight limit.
+
+Formally:
+
+$$
+\text{maximize} \quad \sum_{i=1}^n v_i x_i \\
+\text{subject to} \quad \sum_{i=1}^n w_i x_i \le W, \quad x_i \in \{0,1\}
+$$
+
+This problem is **NP-hard**, meaning that it’s at least as hard as the hardest problems in NP.  
+No polynomial-time algorithm is known for solving it optimally (this is an open Millennium Prize problem).  
+For background, see the [Wikipedia page on the Knapsack problem](https://en.wikipedia.org/wiki/Knapsack_problem).
+
+---
+
+# Data Generation
+
+The data for this lab is generated as follows.  
+To create larger datasets, you can increase the value of `n`.  
+Be careful with the random number generator version to ensure reproducibility.
+
+```{r}
+# Ensure consistent random number generation
+RNGversion(min(as.character(getRversion()), "3.5.3"))
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+
+# Number of items
+n <- 2000
+
+# Generate weights and values
+knapsack_objects <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
+
+# Display first few rows
+head(knapsack_objects)
+```
+
