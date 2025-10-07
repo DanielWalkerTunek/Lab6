@@ -10,12 +10,14 @@
 #'   \item{elements}{The indices of the selected items.}
 #' }
 #'
-#' @example
-#' brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
-#' $value
-#' [1] 16770
-#' $elements
-#' [1] 5 8
+#' @examples
+#' # Example with 8 items
+#' n <- 8
+#' knapsack_objects <- data.frame(
+#'   w = sample(1:4000, size = n, replace = TRUE),
+#'   v = runif(n = n, 0, 10000)
+#' )
+#' brute_force_knapsack(x = knapsack_objects[1:8, ], W = 3500)
 #'
 #' @export
 
