@@ -5,6 +5,7 @@
 # Lab6
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/DanielWalkerTunek/Lab6/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DanielWalkerTunek/Lab6/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of **Lab6** is to explore how algorithmic design and
