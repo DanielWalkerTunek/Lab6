@@ -30,5 +30,4 @@ knapsack_objects <- data.frame(
 )
 
 knapsack_dynamic(knapsack_objects[1:8,], W = 3500)
-
 }
