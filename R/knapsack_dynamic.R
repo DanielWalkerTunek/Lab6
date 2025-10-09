@@ -35,11 +35,42 @@ knapsack_dynamic <- function(x, W) {
     stop("W must be a positive numeric value.", call. = FALSE)
 
 
-  # create output obj
+  n <- nrow(x)
+  m <- matrix(0, nrow = n + 1, ncol = W + 1)
+
+  # code for the loop
+  for (i in 1:n) {
+    for (w in 0:W) {
+      if (x$w[i] <= w) {
+        m[i + 1, w + 1] <- max(
+          m[i, w + 1],
+          m[i, w + 1 - x$w[i]] + x$v[i]
+        )
+      } else {
+        m[i + 1, w + 1] <- m[i, w + 1]
+      }
+    }
+  }
+
+  # Backtrack to find selected elements
+  best_value <- m[n + 1, W + 1]
+  w <- W
+  best_combination <- rep(0, n)
+
+  for (i in n:1) {
+    if (m[i + 1, w + 1] != m[i, w + 1]) {
+      best_combination[i] <- 1
+      w <- w - x$w[i]
+    }
+  }
+
+
   result <- list(
     value = round(best_value, 2),
     elements = which(best_combination == 1)
   )
+
+
 
   return(result)
 
