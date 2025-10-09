@@ -65,8 +65,8 @@ knapsack_dynamic <- function(x, W) {
 
 
   result <- list(
-    #value = round(best_value, 2),
-    #elements = which(best_combination == 1)
+    value = round(best_value, 2),
+    elements = which(best_combination == 1)
   )
 
 

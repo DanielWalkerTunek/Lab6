@@ -1,5 +1,3 @@
-context("brute_force_knapsack")
-
 test_that("brute_force_knapsack() returns correct output type and structure", {
   n <- 8
   knapsack_objects <- data.frame(
