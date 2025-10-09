@@ -19,7 +19,6 @@
 #' )
 #'
 #' knapsack_dynamic(knapsack_objects[1:8,], W = 3500)
-#'
 #' @export
 
 knapsack_dynamic <- function(x, W) {
@@ -66,8 +65,8 @@ knapsack_dynamic <- function(x, W) {
 
 
   result <- list(
-    value = round(best_value, 2),
-    elements = which(best_combination == 1)
+    #value = round(best_value, 2),
+    #elements = which(best_combination == 1)
   )
 
 
