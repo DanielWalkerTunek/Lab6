@@ -22,7 +22,7 @@ This vignette serves as the **lab report** for **Lab 6** in *Advanced R Programm
 The purpose of this lab is to explore **algorithmic complexity** and **computational performance** using the **Knapsack problem**.
 
 
-# The Knapsack Package
+# The Knapsack Problem
 
 The **Knapsack problem** is a classic *discrete optimization problem*.  
 We have a knapsack that can carry a limited weight `W`, and we want to fill it with `n` items —  
@@ -100,6 +100,58 @@ result
 
 
 # 1.1.3 Dynamic programming
+
+## How much time does it takes to run the algorithm for n = 500 objects?
+
+```{r dynamic-programming, cache = TRUE}
+# Generate data for 500 objects
+RNGversion(min(as.character(getRversion()), "3.5.3"))
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+
+n <- 500
+knapsack_objects <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
+
+# Measure computation time
+system.time({
+  result <- knapsack_dynamic(knapsack_objects, W = 3500)
+})
+
+result
+```
+
+# 1.1.4 Greedy heuristic
+
+## How much time does it takes to run the algorithm for n = 1000000 objects?
+```{r greedy-knapsack, cache = TRUE}
+# Generate data for 500 objects
+RNGversion(min(as.character(getRversion()), "3.5.3"))
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+
+n <- 1000000
+knapsack_objects <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
+
+# Measure computation time
+system.time({
+  result <- greedy_knapsack(knapsack_objects, W = 3500)
+})
+
+result
+```
+
+# 1.1.5 Test suits
+
+## Justification that our algorithm is Greedy
+
+Our greedy_knapsack function implements the greedy approximation algorithm by first calculating the value-to-weight ratio for every item. It then sorts the items in descending order based on this ratio, ensuring the most 'efficient' items are considered first. Finally, it iterates through the sorted list, adding each item to the knapsack if it fits within the remaining weight capacity. This approach follows the definition of the greedy algorithm for the knapsack problem and has a computational complexity of O(n log n), dominated by the sorting step.
+
+# 1.1.6 Profile your code and optimize your code
+
 
 
 
