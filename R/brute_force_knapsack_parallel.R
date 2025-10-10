@@ -1,3 +1,4 @@
+
 #' Brute Force Knapsack Solver (with optional parallelization)
 #'
 #' @param x data.frame with two variables v and w
@@ -17,6 +18,8 @@
 #'   v = runif(n = n, 0, 10000)
 #' )
 #' brute_force_knapsack_parallel(x = knapsack_objects[1:8, ], W = 3500, parallel = TRUE)
+#'
+#' @importFrom parallel makeCluster stopCluster clusterExport parLapply detectCores
 #'
 #' @export
 brute_force_knapsack_parallel <- function(x, W, parallel = FALSE) {
@@ -40,14 +43,13 @@ brute_force_knapsack_parallel <- function(x, W, parallel = FALSE) {
   # if parrallel = TRUE
   if (parallel) {
 
-    library(parallel)
-    no_cores <- detectCores(logical = TRUE)
-    cl <- makeCluster(no_cores)
+    no_cores <- max(1, min(2, parallel::detectCores() - 1))
+    cl <- parallel::makeCluster(no_cores)
 
     # send variables to each worker
-    clusterExport(cl, varlist = c("x", "W", "n"), envir = environment())
+    parallel::clusterExport(cl, varlist = c("x", "W", "n"), envir = environment())
 
-    results <- parLapply(cl, combos, function(i) {
+    results <- parallel::parLapply(cl, combos, function(i) {
       combo <- as.integer(intToBits(i))[1:n]
       total_weight <- sum(x$w * combo)
       total_value  <- sum(x$v * combo)
@@ -55,7 +57,7 @@ brute_force_knapsack_parallel <- function(x, W, parallel = FALSE) {
       else return(NULL)
     })
 
-    stopCluster(cl)
+    parallel::stopCluster(cl)
 
     # filter the results
     results <- Filter(Negate(is.null), results)
