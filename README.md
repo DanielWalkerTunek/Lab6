@@ -37,5 +37,5 @@ After installing and building the package, you can view the vignette
 using:
 
 ``` r
-browseVignettes("lab report knapsack")
+browseVignettes("Lab6")
 ```
