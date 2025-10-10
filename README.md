@@ -13,13 +13,6 @@ implementation affect computational performance in R. We create an R
 package to study algorithms of different computational complexities and
 demonstrate ways to make R code faster.
 
-In this lab, we will:
-
-- bla
-
-- bla
-
-- bla…
 
 ## Installation
 
