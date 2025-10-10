@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(Lab6)
+library(profvis)
 ```
 
 # Introduction
@@ -78,7 +79,7 @@ Question: How much time does it takes to run the algorithm for n = 16 objects?
 To evaluate the performance of the brute-force algorithm, we can measure the execution time when solving a knapsack problem with **16 items**.  
 Since the algorithm checks all \( 2^{16} = 65,536 \) possible combinations, it should still be feasible to compute — but noticeably slower than smaller cases.
 
-```{r brute-force-timing, cache = TRUE}
+```{r brute-force-timing}
 # Generate data for 16 objects
 RNGversion(min(as.character(getRversion()), "3.5.3"))
 set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
@@ -103,7 +104,7 @@ result
 
 ## How much time does it takes to run the algorithm for n = 500 objects?
 
-```{r dynamic-programming, cache = TRUE}
+```{r dynamic-programming}
 # Generate data for 500 objects
 RNGversion(min(as.character(getRversion()), "3.5.3"))
 set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
@@ -125,7 +126,7 @@ result
 # 1.1.4 Greedy heuristic
 
 ## How much time does it takes to run the algorithm for n = 1000000 objects?
-```{r greedy-knapsack, cache = TRUE}
+```{r greedy-knapsack}
 # Generate data for 500 objects
 RNGversion(min(as.character(getRversion()), "3.5.3"))
 set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
@@ -152,4 +153,34 @@ Our greedy_knapsack function implements the greedy approximation algorithm by fi
 
 # 1.1.6 Profile your code and optimize your code
 
+To identify performance bottlenecks, We used the `profvis` package as recommended in the lab instructions.
+
+### Profiling Analysis
+
+* **`brute_force_knapsack()`**: The profiler confirmed that the `for` loop, which iterates through all \( 2^n \) combinations, is the bottleneck. The operations inside are fast, but their sheer number makes the function slow.
+* **`knapsack_dynamic()`**: The nested `for` loops used to fill the dynamic programming matrix accounted for must of the execution time. This is the computational core of the algorithm.
+* **`greedy_knapsack()`**: The profiler highlighted two main time consumers: the `order()` call for sorting items by their value/weight ratio (the expected O(n log n) step) and the subsequent `for` loop used to fill the knapsack.
+
+### Optimization of `greedy_knapsack`
+
+The `for` loop in the `greedy_knapsack` function was a good candidate for optimization. We replaced the iterative approach with a more efficient, **vectorized** solution using `cumsum()`. This function calculates the cumulative weight of the sorted items in a single, fast operation, allowing us to select all valid items without an R-level loop.
+
+### Question: What performance gain could you get by trying to improve your code?
+
+To quantify the performance gain, I benchmarked the original `for` loop implementation against the new, optimized `cumsum()` version using the `microbenchmark` package.
+
+```{r optimization-benchmark}
+
+n <- 1000
+knapsack_objects_large <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
+
+microbenchmark::microbenchmark(
+  original_loop = greedy_knapsack_original(knapsack_objects_large, W = 3500),
+  optimized_cumsum = greedy_knapsack(knapsack_objects_large, W = 3500),
+  times = 3
+)
+```
 

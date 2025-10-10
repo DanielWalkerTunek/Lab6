@@ -36,14 +36,35 @@ greedy_knapsack <- function(x, W) {
   x$original_index <- seq_len(nrow(x))
 
   # Sort items by ratio in descending order
-  # Handle cases where ratio is Inf (w=0, v>0) by placing them first
   sorted_x <- x[order(x$ratio, decreasing = TRUE), ]
 
+  # Calculate the cumulative weight of the sorted items
+  cumulative_weights <- cumsum(sorted_x$w)
+
+  # Find the indices of all items that can fit
+  items_to_take_indices <- which(cumulative_weights <= W)
+
+  # If any items fit, select them
+  if (length(items_to_take_indices) > 0) {
+    selected_items <- sorted_x[items_to_take_indices, ]
+    total_value <- sum(selected_items$v)
+    elements <- selected_items$original_index
+  } else {
+    # Handle the case where no items fit
+    total_value <- 0
+    elements <- c()
+  }
+
+  return(list(value = round(total_value), elements = sort(elements)))
+}
+
+greedy_knapsack_original <- function(x, W) {
+  x$ratio <- x$v / x$w
+  x$original_index <- seq_len(nrow(x))
+  sorted_x <- x[order(x$ratio, decreasing = TRUE), ]
   total_weight <- 0
   total_value <- 0
   elements <- c()
-
-  # Iterate through sorted items and add to knapsack if they fit
   for (i in 1:nrow(sorted_x)) {
     item <- sorted_x[i, ]
     if (total_weight + item$w <= W) {
@@ -52,6 +73,5 @@ greedy_knapsack <- function(x, W) {
       elements <- c(elements, item$original_index)
     }
   }
-
   return(list(value = round(total_value), elements = sort(elements)))
 }
