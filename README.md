@@ -13,13 +13,6 @@ implementation affect computational performance in R. We create an R
 package to study algorithms of different computational complexities and
 demonstrate ways to make R code faster.
 
-In this lab, we will:
-
-- bla
-
-- bla
-
-- bla…
 
 ## Installation
 
@@ -44,5 +37,5 @@ After installing and building the package, you can view the vignette
 using:
 
 ``` r
-browseVignettes("lab report knapsack")
+browseVignettes("Lab6")
 ```

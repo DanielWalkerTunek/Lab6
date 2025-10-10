@@ -4,3 +4,7 @@
 ^doc$
 ^Meta$
 ^\.github$
+^Lab6/vignettes/.*_cache$
+^.*\.RData$
+^.*\.rdb$
+^.*\.rdx$

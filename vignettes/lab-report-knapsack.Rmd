@@ -26,8 +26,7 @@ The purpose of this lab is to explore **algorithmic complexity** and **computati
 # The Knapsack Problem
 
 The **Knapsack problem** is a classic *discrete optimization problem*.  
-We have a knapsack that can carry a limited weight `W`, and we want to fill it with `n` items —  
-each item `i` having a weight `wᵢ` and a value `vᵢ`.  
+We have a knapsack that can carry a limited weight `W`, and we want to fill it with `n` items, each item `i` having a weight `wᵢ` and a value `vᵢ`.  
 The goal is to **maximize the total value** of the selected items without exceeding the weight limit.
 
 Formally:
