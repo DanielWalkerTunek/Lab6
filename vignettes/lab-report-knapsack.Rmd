@@ -70,7 +70,7 @@ head(knapsack_objects)
 
 # 1.1.2 Brute force search
 
-Question How much time does it takes to run the algorithm for n = 16 objects?
+Question: How much time does it takes to run the algorithm for n = 16 objects?
 
 
 ## How much time does it take for n = 16 objects?
@@ -101,6 +101,7 @@ result
 
 # 1.1.3 Dynamic programming
 
+<<<<<<< HEAD
 ## How much time does it takes to run the algorithm for n = 500 objects?
 
 ```{r dynamic-programming, cache = TRUE}
@@ -153,7 +154,23 @@ Our greedy_knapsack function implements the greedy approximation algorithm by fi
 # 1.1.6 Profile your code and optimize your code
 
 
+=======
+Qustion: How much time does it takes to run the algorithm for n = 500 objects?
+>>>>>>> 7189790de1190b7117c966b2150f01d78755d9dc
 
+```{r Dynamic programing, cache=TRUE}
+n <- 2000
+knapsack_objects <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
 
+system.time(
+  result_500 <- knapsack_dynamic(knapsack_objects[1:500, ], W = 2000)
+)
 
+```
+
+For n = 500 objects and a capacity of W = 2000, the algorithm completes in 
+roughly 2–3 seconds on my Macbook laptop.
 
