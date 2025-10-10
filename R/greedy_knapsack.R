@@ -57,21 +57,3 @@ greedy_knapsack <- function(x, W) {
 
   return(list(value = round(total_value), elements = sort(elements)))
 }
-
-greedy_knapsack_original <- function(x, W) {
-  x$ratio <- x$v / x$w
-  x$original_index <- seq_len(nrow(x))
-  sorted_x <- x[order(x$ratio, decreasing = TRUE), ]
-  total_weight <- 0
-  total_value <- 0
-  elements <- c()
-  for (i in 1:nrow(sorted_x)) {
-    item <- sorted_x[i, ]
-    if (total_weight + item$w <= W) {
-      total_weight <- total_weight + item$w
-      total_value <- total_value + item$v
-      elements <- c(elements, item$original_index)
-    }
-  }
-  return(list(value = round(total_value), elements = sort(elements)))
-}
